@@ -5,10 +5,14 @@ function Weather() {
    const date = new Date().toDateString();
    const { typeOfTemp, setTypeOfTemp, weatherInfo, error, loadingWeather } =
       useWeatherAppContext();
+
    return (
       <section className="weather-info">
-         {error ? (
-            <h2>{error}</h2>
+         {error || loadingWeather ? (
+            <div>
+               {error && <h2>{error}</h2>}
+               {loadingWeather && <h2>Loading data, please wait...</h2>}
+            </div>
          ) : (
             weatherInfo && (
                <article>
@@ -62,7 +66,6 @@ function Weather() {
                </article>
             )
          )}
-         {loadingWeather && <h2>Loading data, please wait...</h2>}
       </section>
    );
 }
